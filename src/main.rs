@@ -18,14 +18,14 @@ macro_rules! vector {
 
 #[macro_export]
 macro_rules! double_tuple_sum {
-    ( $($first_item: expr),*; $($second_item: expr),*) => {
+    ( $($first_item: expr),* $(,)?; $($second_item: expr),* $(,)?) => {
         {
             let mut tuple = (0, 0);
-            $( tuple.0 += $first_item; )*
-            $( tuple.1 += $second_item; )*
+            $( tuple.0 += $first_item; )*;
+            $( tuple.1 += $second_item; )*;
             tuple
         }
-    }
+    };
 }
 
 #[cfg(test)]
@@ -39,13 +39,13 @@ mod tests {
     }
 
     #[test]
-    fn is_empty() {
+    fn vector_empty() {
         let result: Vec<i32> = vector![];
         assert!(result.is_empty());
     }
 
     #[test]
-    fn is_work_list() {
+    fn vector_listing() {
         let result = vector![1, 2, 3];
         assert_eq!(result, vec![1, 2, 3]);
         assert_eq!(result.len(), 3);
