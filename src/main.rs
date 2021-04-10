@@ -1,16 +1,14 @@
-
-fn main() {
-
-}
+fn main() {}
 
 #[macro_export]
 macro_rules! vector {
-    () => {
-        {
-            let temp_vec = Vec::new();
-            temp_vec
-        }
-    }
+    ( $($item: expr), *) => {{
+        let mut temp_vec = Vec::new();
+        $(
+            temp_vec.push($item);
+        )*
+        temp_vec
+    }};
 }
 
 #[cfg(test)]
@@ -21,5 +19,11 @@ mod tests {
     fn is_empty() {
         let result: Vec<i32> = vector![];
         assert!(result.is_empty());
+    }
+
+    #[test]
+    fn is_work() {
+        let result = vector![1,2,3];
+        assert_eq!(result, vec![1,2,3]);
     }
 }

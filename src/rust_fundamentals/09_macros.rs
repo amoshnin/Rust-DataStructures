@@ -28,7 +28,6 @@ mod tests {
 macro_rules! summer {
     ($x: ident; $($num: expr), *) => {
         $(
-            // $x += $num;
             println!("{:?}", $num);
             for i in $num.iter() {
                 $x += i;
