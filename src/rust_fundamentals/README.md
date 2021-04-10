@@ -36,42 +36,59 @@ This also allows us to store variables within that scope.
 Below two examples are shown with test implementations:
 
 ```rust
-// Without a return value (we are just mutating the `x` argument)
+// Simple sum of all passed values (variable number of arguments) and returning the result
 #[macro_export]
-macro_rules! sum_up {
+macro_rules! simple_sum {
+    ( $($x: expr), +) => {
+        { // <- this block scope is added
+            let mut acc = 0;
+            $( acc += $x; )+
+            acc
+        } // <- this block scope is added
+    }
+}
+
+// Sum by mutating the reference to `x` that gets passed into the macro (as mutable reference), & without a return value
+#[macro_export]
+macro_rules! assignment_sum {
     ($x: ident; $($num: expr), *) => {
         $(
-            for i in $num.iter() {
-                $x += i;
-            }
+            $x += $num;
         )*
     }
 }
 
 // With a return value (we are creating a new vector, manipulating and returning it)
 #[macro_export]
-macro_rules! vec_macro {
+macro_rules! vector {
     ( $($x: expr), *) => {
-        { // <- this scope is added
+        { // <- this block scope is added
             let mut temp_vec = Vec::new();
             $( temp_vec.push($x); )*
             temp_vec
-        } // <- this scope is added
+        } // <- this block scope is added
     }
 }
 ```
 Here we have the tests for these macros: 
 ```rust
 #[test]
-fn sum_macro_test() {
-     let mut x = 1;
-    sum_up![x; [2, 34, 5]];
-    assert_eq!(x, 42);
+fn simple_sum_test() {
+ let result = simple_sum!(2, 4, 6);
+ assert_eq!(result, 12);
 }
 
 #[test]
-fn vector_macro_test() {
-    let result = vec_macro!(1, 2, 3, 4, 5);
-    assert_eq!(result, vec![1, 2, 3, 4, 5]);
+fn assignment_sum_test() {
+ let mut x = 1;
+ assignment_sum![x; 2, 34, 5];
+ assert_eq!(x, 42);
+}
+
+#[test]
+fn vector_test() {
+ let result = vector!(1, 2, 3, 4, 5);
+ assert_eq!(result, vec![1, 2, 3, 4, 5]);
 }
 ```
+

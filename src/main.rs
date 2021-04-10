@@ -18,7 +18,7 @@ mod tests {
 
     #[test]
     fn vector_test() {
-        let result = vector_test!(1, 2, 3, 4, 5);
+        let result = vector!(1, 2, 3, 4, 5);
         assert_eq!(result, vec![1, 2, 3, 4, 5]);
     }
 }
@@ -45,7 +45,7 @@ macro_rules! assignment_sum {
 }
 
 #[macro_export]
-macro_rules! vector_test {
+macro_rules! vector {
     ( $($x: expr), *) => {
         {
             let mut temp_vec = Vec::new();
@@ -54,7 +54,6 @@ macro_rules! vector_test {
         }
     }
 }
-
 
 fn main() {}
 //
