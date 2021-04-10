@@ -35,6 +35,55 @@ Note: When returning anything from the declarative macro, we add an additional s
 This also allows us to store variables within that scope.
 Below two examples are shown with test implementations:
 
+The reason for this is that the output of a macro (if there is one) must be a valid expression syntax.
+Therefore, if return a sequence without any block scope, it isn't a valid expression.
+Examples:
+```rust
+#[cfg(test)]
+mod tests {
+ use super::*;
+
+ #[test]
+ fn vector_something() {
+  let something_vector = something!(1,2,3,4,5);
+  assert_eq!(something_vector, vec![1,2,3,4,5]);
+ }
+
+ #[test]
+ fn printer() {
+  let x = 32;
+  something!(x);
+ }
+
+ #[test]
+ fn result() {
+  let v: Vec<i32> = something!();
+ }
+}
+
+#[macro_export]
+macro_rules! something {
+ () => {
+  Vec::new()
+ };
+ ($elem: ident) => {
+  println!("Good morning");
+  for i in 0..10 {
+   println!("Happy coding!, {}", $elem);
+  }
+ };
+ ($($elem: expr), *) => {
+  {
+   let mut temp_vec = Vec::new();
+   $(
+     temp_vec.push($elem);
+   )*
+   temp_vec
+  }
+ }
+}
+```
+
 ```rust
 // Simple sum of all passed values (variable number of arguments) and returning the result
 #[macro_export]
@@ -91,4 +140,3 @@ fn vector_test() {
  assert_eq!(result, vec![1, 2, 3, 4, 5]);
 }
 ```
-
