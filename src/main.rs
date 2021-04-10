@@ -7,19 +7,45 @@
 // - Explanation: https://blog.logrocket.com/macros-in-rust-a-tutorial-with-examples/#whatarerustmacros
 
 fn main() {
-    let z = printer!(432, 43, 432, 4, 34, 3, 43, 4, 344, 4);
-    println!("{:?}", z);
+
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn sum_macro_test() {
+        let result = sum_macro!(2, 4, 6);
+        assert_eq!(result, 12);
+    }
+
+    #[test]
+    fn sum_vector_macro() {
+        let result = vec_macro!(1,2,3,4,5);
+        assert_eq!(result, vec![1,2,3,4,5]);
+    }
 }
 
 #[macro_export]
-macro_rules! printer { // declaration (name of the macro)
+macro_rules! vec_macro {
     ( $($x: expr), *) => {
         {
             let mut temp_vec = Vec::new();
-        $(
-        temp_vec.push($x);
-        )*
-        temp_vec
+            $( temp_vec.push($x); )*
+            temp_vec
         }
     }
 }
+
+#[macro_export]
+macro_rules! sum_macro {
+    ( $($x: expr), +) => {
+        {
+            let mut acc = 0;
+            $( acc += $x; )+
+            acc
+        }
+    }
+}
+
