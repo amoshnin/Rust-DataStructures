@@ -1,0 +1,13 @@
+[package]
+name = "x-data"
+version = "0.1.0"
+authors = ["Artem <swift.uix@gmail.com>"]
+edition = "2018"
+keywords = ["Algorithms"]
+description = "Do not use this crate for production! It is for demo purposes only!"
+readme = "readme.md"
+license="MIT"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
