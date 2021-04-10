@@ -1,6 +1,3 @@
-
-fn main() {}
-
 #[macro_export]
 macro_rules! vector {
     ($($item: expr), *) => {
@@ -36,4 +33,8 @@ mod tests {
         assert_eq!(result, vec![1, 2, 3]);
         assert_eq!(result.len(), 3);
     }
+}
+
+fn main() {
+
 }

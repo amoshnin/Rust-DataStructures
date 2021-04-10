@@ -68,6 +68,8 @@ macro_rules! something {
  };
  ($elem: ident) => {
   println!("Good morning");
+  let s = Vec::<i32>::new(); // just to show case the ability that we can define variables without the block scope
+                             // as long as we don't return and try to recieve any data from the macro
   for i in 0..10 {
    println!("Happy coding!, {}", $elem);
   }
