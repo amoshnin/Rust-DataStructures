@@ -1,7 +1,8 @@
+// Vector generations with Declarative Macros
 #[macro_export]
 macro_rules! vector {
     // Zero or more items with a delimiter of `,` between them //
-    ($($item: expr), *) => {
+    ($($item: expr),* $(,)?) => {
         {
             let mut temp_vec = Vec::new();
             $(temp_vec.push($item);)*
@@ -11,11 +12,16 @@ macro_rules! vector {
     ($item: expr; $num_copies: expr) => {
         {
             let mut temp_vec = Vec::new();
+            let x = $item;
+            for _ in 0..$num_copies {
+                temp_vec.push(x.clone());
+            }
             temp_vec
         }
     }
 }
 
+// Tuple generations with Declarative Macros
 #[macro_export]
 macro_rules! double_tuple_sum {
     ( $($first_item: expr),* $(,)?; $($second_item: expr),* $(,)?) => {
@@ -50,6 +56,34 @@ mod tests {
         assert_eq!(result, vec![1, 2, 3]);
         assert_eq!(result.len(), 3);
     }
+
+    #[test]
+    fn vector_generation() {
+        let result = vector![4; 10];
+        assert_eq!(result, vec![4; 10]);
+    }
 }
 
-fn main() {}
+// Traits implementation with Declarative Macros
+trait MaximumValue {
+    fn maximum_value() -> Self;
+}
+
+macro_rules! max_impl {
+    ($type: ty) => {
+        impl $crate::MaximumValue for $type {
+            fn maximum_value() -> Self {
+                <$type>::MAX
+            }
+        }
+    }
+}
+
+max_impl!(i32);
+max_impl!(u32);
+max_impl!(i64);
+
+fn main() {
+    let g = i32::maximum_value();
+    println!("{}", g);
+}
