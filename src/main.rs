@@ -16,9 +16,7 @@ pub trait Stylable {
 }
 
 #[derive(StylableMacro)]
-pub struct Food {
-    pub name: String,
-}
+pub struct Food;
 
 #[test]
 fn builder_derive_macro_test() {}
