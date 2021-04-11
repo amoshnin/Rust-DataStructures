@@ -1,32 +1,37 @@
-use x_data::StylableMacro;
+use x_data::{Builder, StylableMacro};
 fn main() {}
 
 // --> Builder Pattern for a Type Custom Derive Procedural Macro
+#[derive(Builder)]
+struct _Command {
+    executable: String,
+    args: Vec<String>,
+    env: Vec<String>,
+    current_dir: String,
+}
+
 #[cfg(test)]
-mod builder_tests {
+mod builder_macro_tests {
     use super::*;
 
     #[test]
-    fn builder_derive_macro_test() {}
+    fn builder_derive() {}
 }
 
 // --> Reference Custom Derive Procedural Macro Example
-pub trait Stylable {
+trait Stylable {
     fn restyle() -> String;
 }
 
 #[derive(StylableMacro)]
-pub struct Food;
-
-#[test]
-fn builder_derive_macro_test() {}
+struct Food;
 
 #[cfg(test)]
-mod examples_tests {
+mod examples_macro_tests {
     use super::*;
 
     #[test]
-    fn stylable_derive_macro_test() {
+    fn stylable_derive() {
         assert_eq!(Food::restyle(), "Food");
     }
 }

@@ -6,6 +6,7 @@ use syn::{self, parse_macro_input, DeriveInput};
 #[proc_macro_derive(Builder)]
 pub fn builder_derive(input: TokenStream) -> TokenStream {
     let ast = parse_macro_input!(input as DeriveInput);
+    eprintln!("{:#?}", ast);
     impl_builder_trait(&ast)
 }
 
