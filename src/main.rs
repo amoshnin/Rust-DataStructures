@@ -9,11 +9,11 @@ macro_rules! vector {
             temp_vec
         }
     };
-    ($item: expr; $num_copies: expr) => {
+    ($item: expr; $count: expr) => {
         {
             let mut temp_vec = Vec::new();
             let x = $item;
-            for _ in 0..$num_copies {
+            for _ in 0..$count {
                 temp_vec.push(x.clone());
             }
             temp_vec
@@ -59,7 +59,8 @@ mod tests {
 
     #[test]
     fn vector_generation() {
-        let result = vector![4; 10];
+        let mut s = Some(4);
+        let result = vector![s.take().unwrap(); 10];
         assert_eq!(result, vec![4; 10]);
     }
 }
@@ -76,7 +77,7 @@ macro_rules! max_impl {
                 <$type>::MAX
             }
         }
-    }
+    };
 }
 
 max_impl!(i32);
