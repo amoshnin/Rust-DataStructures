@@ -18,7 +18,7 @@ fn impl_stylable_trait(stream: &syn::DeriveInput) -> TokenStream {
     let name = &stream.ident;
     let gen = quote! {
         impl Stylable for #name {
-            fn restyle() {
+            pub fn restyle() {
                 println!("Hello, Macro! My name is {}", stringify!(#name))
             }
         }

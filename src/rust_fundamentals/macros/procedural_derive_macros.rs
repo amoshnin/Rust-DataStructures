@@ -9,6 +9,13 @@ fn main() {
 }
 
 #[derive(StylableMacro)]
-struct Food {
+pub struct Food {
     name: String,
+}
+
+#[cfg(test)]
+mod tests {
+    fn test() {
+        assert_eq!(2+ 2, 4);
+    }
 }
