@@ -21,6 +21,12 @@ mod tests {
         let result = vector!(1, 2, 3, 4, 5);
         assert_eq!(result, vec![1, 2, 3, 4, 5]);
     }
+
+    #[test]
+    fn vec_structured_test() {
+        let a= vec_structured!(10 => [1, 2, 3]; 20 => [4, 5, 6]);
+        assert_eq!(a, &[11, 12, 13, 24, 25, 26]);
+    }
 }
 
 // Macros
@@ -52,5 +58,12 @@ macro_rules! vector {
             $( temp_vec.push($x); )*
             temp_vec
         }
+    }
+}
+
+#[macro_export]
+macro_rules! vec_structured {
+    ( $($x: expr => [$($y:expr),*] );* ) => {
+        &[ $( $($y + $x),* ),* ]
     }
 }
