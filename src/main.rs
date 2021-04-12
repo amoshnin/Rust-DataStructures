@@ -36,12 +36,6 @@ mod examples_macro_tests {
     }
 }
 
-#[allow(dead_code)]
-mod restyle {
-    pub fn jj() {}
-    pub fn eat() {}
-}
-
 // mod sorting_algorithms;
 // use sorting_algorithms::merge_sort;
 //
