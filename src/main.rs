@@ -10,7 +10,6 @@ struct _Command {
     current_dir: String,
 }
 
-
 #[cfg(test)]
 mod builder_macro_tests {
     use super::*;
@@ -37,9 +36,7 @@ mod examples_macro_tests {
     }
 }
 
-mod restyle {
-
-}
+mod restyle {}
 
 // mod sorting_algorithms;
 // use sorting_algorithms::merge_sort;
