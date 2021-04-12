@@ -10,6 +10,8 @@ struct _Command {
     current_dir: String,
 }
 
+pub fn feature_1() {}
+
 #[cfg(test)]
 mod builder_macro_tests {
     use super::*;
