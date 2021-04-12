@@ -10,7 +10,11 @@ struct _Command {
     current_dir: String,
 }
 
+
 pub fn feature_1() {}
+
+pub fn feature_2() {}
+
 
 #[cfg(test)]
 mod builder_macro_tests {
