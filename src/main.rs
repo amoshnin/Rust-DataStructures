@@ -10,8 +10,6 @@ struct _Command {
     current_dir: String,
 }
 
-pub fn feature_1() {}
-
 #[cfg(test)]
 mod builder_macro_tests {
     use super::*;
@@ -41,6 +39,7 @@ mod examples_macro_tests {
 #[allow(dead_code)]
 mod restyle {
     pub fn jj() {}
+    pub fn eat() {}
 }
 
 // mod sorting_algorithms;
