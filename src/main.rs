@@ -11,11 +11,6 @@ struct _Command {
 }
 
 
-pub fn feature_1() {}
-
-pub fn feature_2() {}
-
-
 #[cfg(test)]
 mod builder_macro_tests {
     use super::*;
