@@ -37,6 +37,10 @@ mod examples_macro_tests {
     }
 }
 
+mod restyle {
+
+}
+
 // mod sorting_algorithms;
 // use sorting_algorithms::merge_sort;
 //
