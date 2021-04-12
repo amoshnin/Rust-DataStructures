@@ -61,7 +61,7 @@ mod tests {
 
     #[test]
     fn test() {
-      let result = vector!(2 => [2, 3, 4]; 4 => [7, 2, 4];);
+        let result = vector!(2 => [2, 3, 4]; 4 => [7, 2, 4];);
         assert_eq!(result, [4, 5, 6, 11, 6, 8]);
     }
 }
