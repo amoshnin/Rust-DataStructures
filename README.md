@@ -1,7 +1,3 @@
-## Table of Contents
-
-- 1.
-
 ## Personal Goals from this Projects
 
 - Confidence using Rust's Lifetime system
